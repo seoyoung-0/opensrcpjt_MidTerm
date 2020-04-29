@@ -1,5 +1,4 @@
 package MidTerm;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,19 +9,18 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-    	String item ="";
+import midterm.problem2.RegularExpression;
+
+public class Problem2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String item ="";
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter the keyword you are looking for: ");
+        System.out.print("Enter the keyword you are looking for: ");
         item = in.next();
-        boolean itemOk=true;
+ 
+        RegularExpression re = new RegularExpression();
         
         JSONParser parser = new JSONParser();
         try {
@@ -30,37 +28,30 @@ public class App
 
 			try {
 				jsonObject = (JSONObject) parser.parse(new FileReader("C:\\Users\\kdy03\\eclipse-space\\MidTerm\\midterm.json"));
-				
-				
+		
 				JSONArray itemArray = (JSONArray)jsonObject.get("poem");
 				String eachString ="";
 				 for(int i=0;i<itemArray.size();i++) {
 			        	
 			        	JSONObject itemObject = (JSONObject)itemArray.get(i);
 			        	eachString = itemObject.values().toString();
-			        	for(int j=0;j<eachString.length();j++) {
-			        		if(eachString.contains(item)) {
-			        			itemOk=true;
-			        		}else {
-			        			itemOk=false;
-			        		}
-				 }
-			        	if(itemOk==true)
-		        		{
-		        			System.out.print("item"+i+":");
+		
+			        	if(re.check(eachString, item)) {
+			        		System.out.print("item "+i+":");
 		        			System.out.println(eachString);
-		        			}
-		        		}
-			} catch (FileNotFoundException e) {
+			        	}
+				 }
+
+			}catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (IOException e) {
+			}catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-    }
-}
+        }
+	}
 }
