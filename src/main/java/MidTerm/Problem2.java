@@ -37,6 +37,7 @@ public class Problem2 {
 			        	eachString = itemObject.values().toString();
 		
 			        	if(re.check(eachString, item)) {
+			       
 			        		System.out.print("item "+i+":");
 		        			System.out.println(eachString);
 			        	}
