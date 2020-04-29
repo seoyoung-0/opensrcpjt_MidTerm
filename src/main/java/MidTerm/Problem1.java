@@ -14,7 +14,7 @@ import org.json.simple.parser.ParseException;
  * Hello world!
  *
  */
-public class App 
+public class Problem1 
 {
     public static void main( String[] args )
     {
